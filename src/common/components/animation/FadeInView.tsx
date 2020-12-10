@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 
 const DEFAULT = {
   duration: 1000,
@@ -11,17 +12,21 @@ type Props = {
 };
 
 const FadeInView: React.FunctionComponent<Props> = (props) => {
+  const navigationFocused = useIsFocused();
   const { current: fadeAnimation } = useRef(new Animated.Value(0));
   const { duration = DEFAULT.duration, defaultConfig } = props;
 
   useEffect(() => {
-    Animated.timing(fadeAnimation, {
-      ...defaultConfig,
-      useNativeDriver: false,
-      toValue: 1,
-      duration,
-    }).start();
-  }, [fadeAnimation]);
+    fadeAnimation.setValue(0);
+    if (navigationFocused) {
+      Animated.timing(fadeAnimation, {
+        ...defaultConfig,
+        useNativeDriver: false,
+        toValue: 1,
+        duration,
+      }).start();
+    }
+  }, [navigationFocused]);
 
   return (
     <Animated.View style={{ opacity: fadeAnimation }}>
