@@ -47,7 +47,7 @@ const Router = () => {
       />
       <Tab.Screen
         name={ROUTES.REMINDERS}
-        component={TodoList}
+        component={EmptyComponent}
         options={{
           tabBarLabel: ROUTES.REMINDERS,
           tabBarIcon: ({ focused }) => (

@@ -39,19 +39,30 @@ const Todo: FunctionComponent<ITodoProps> = (props) => {
       onLongPress={removeOnPress}
       underlayColor={MAIN_DARK_BACKGROUND_COLOR}>
       <View style={styles.container}>
-        <TouchableOpacity
-          style={[styles.iconContainer, checked && styles.checkedIconContainer]}
-          onPress={() => setChecked((prev) => !prev)}>
-          <Icon
-            name="check"
-            type="material"
-            color={checked ? 'white' : MAIN_ELEMENT_COLOR}
-            size={15}
-          />
-        </TouchableOpacity>
+        <CustomAnimation.FadeInView duration={500}>
+          <TouchableOpacity
+            style={[
+              styles.iconContainer,
+              checked && styles.checkedIconContainer,
+            ]}
+            onPress={() => setChecked((prev) => !prev)}>
+            <CustomAnimation.SpringView
+              initialSpringPosition="left"
+              defaultConfig={{ friction: 10 }}>
+              <Icon
+                name="check"
+                type="material"
+                color={checked ? 'white' : MAIN_ELEMENT_COLOR}
+                size={15}
+              />
+            </CustomAnimation.SpringView>
+          </TouchableOpacity>
+        </CustomAnimation.FadeInView>
         <View style={styles.textContainer}>
           <CustomAnimation.FadeInView>
-            <CustomAnimation.SpringView initialSpringPosition="right">
+            <CustomAnimation.SpringView
+              initialSpringPosition="right"
+              defaultConfig={{ friction: 8 }}>
               <Text style={styles.text}>{todo.name}</Text>
 
               <Text style={styles.description}>

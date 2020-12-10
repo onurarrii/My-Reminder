@@ -12,21 +12,17 @@ type Props = {
 };
 
 const FadeInView: React.FunctionComponent<Props> = (props) => {
-  const navigationFocused = useIsFocused();
   const { current: fadeAnimation } = useRef(new Animated.Value(0));
   const { duration = DEFAULT.duration, defaultConfig } = props;
 
   useEffect(() => {
-    fadeAnimation.setValue(0);
-    if (navigationFocused) {
-      Animated.timing(fadeAnimation, {
-        ...defaultConfig,
-        useNativeDriver: false,
-        toValue: 1,
-        duration,
-      }).start();
-    }
-  }, [navigationFocused]);
+    Animated.timing(fadeAnimation, {
+      ...defaultConfig,
+      useNativeDriver: false,
+      toValue: 1,
+      duration,
+    }).start();
+  }, [fadeAnimation]);
 
   return (
     <Animated.View style={{ opacity: fadeAnimation }}>

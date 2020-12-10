@@ -32,8 +32,6 @@ const calculateInitialViewPosition = (
 };
 
 const SpringView: React.FunctionComponent<Props> = (props) => {
-  const navigationFocused = useIsFocused();
-
   const {
     initialSpringPosition = DEFAULT.initialSpringPosition,
     springRange = DEFAULT.springRange,
@@ -47,15 +45,12 @@ const SpringView: React.FunctionComponent<Props> = (props) => {
   const { current: pan } = useRef(new Animated.ValueXY(initialPosition));
 
   useEffect(() => {
-    pan.setValue(initialPosition);
-    if (navigationFocused) {
-      Animated.spring(pan, {
-        ...props.defaultConfig,
-        useNativeDriver: true,
-        toValue: { x: 0, y: 0 },
-      }).start();
-    }
-  }, [navigationFocused]);
+    Animated.spring(pan, {
+      ...props.defaultConfig,
+      useNativeDriver: true,
+      toValue: { x: 0, y: 0 },
+    }).start();
+  }, [pan]);
 
   return (
     <Animated.View
