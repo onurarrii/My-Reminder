@@ -4,6 +4,7 @@ import {
   PRIMARY_BORDER_COLOR,
   PRIMARY_DARK_BACKGROUND_COLOR,
   PRIMARY_COLOR,
+  PRIMARY_PALE_COLOR,
 } from '../../common/GlobalStyles';
 import { ModalProps } from 'react-native-modal';
 
@@ -72,7 +73,7 @@ export const addTodoModalStyles = StyleSheet.create({
     fontSize: 20,
     flex: 1,
     borderBottomWidth: 2,
-    borderBottomColor: PRIMARY_COLOR,
+    borderBottomColor: PRIMARY_PALE_COLOR,
     paddingBottom: 5,
   },
   label: {

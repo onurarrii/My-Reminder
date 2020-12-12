@@ -64,7 +64,7 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
           />
         </View>
         <View style={styles.row}>
-          <Text style={styles.header}>Add Todo</Text>
+          <Text style={styles.header}>Add Task</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.label}>Name</Text>
