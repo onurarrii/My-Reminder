@@ -6,7 +6,7 @@ import {
   TextInputFocusEventData,
   TextInputProps,
 } from 'react-native';
-import {DEFAULT_BORDER_COLOR} from "../GlobalStyles";
+import { PRIMARY_BORDER_COLOR } from '../GlobalStyles';
 
 type ComponentType = React.ForwardRefRenderFunction<TextInput, TextInputProps>;
 
@@ -41,7 +41,7 @@ const FocusableTextInput: ComponentType = (props, ref) => {
 
 const style = StyleSheet.create({
   focused: {
-    borderColor: DEFAULT_BORDER_COLOR,
+    borderColor: PRIMARY_BORDER_COLOR,
   },
 });
 

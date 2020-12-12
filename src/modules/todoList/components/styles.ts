@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
-import { MAIN_BACKGROUND_COLOR } from '../../../common/GlobalStyles';
+import { PRIMARY_BACKGROUND_COLOR } from '../../../common/GlobalStyles';
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: MAIN_BACKGROUND_COLOR,
+    backgroundColor: PRIMARY_BACKGROUND_COLOR,
   },
   container: {
     paddingTop: 30,

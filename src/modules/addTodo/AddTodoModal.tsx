@@ -12,8 +12,8 @@ import React, { useCallback, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../todoList/slices/todoListSlice';
 import {
-  INACTIVE_ROUTER_ELEMENT_COLOR,
-  MAIN_ELEMENT_COLOR,
+  PRIMARY_PALE_COLOR,
+  PRIMARY_COLOR,
 } from '../../common/GlobalStyles';
 
 type Props = {
@@ -51,14 +51,14 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
           <Icon
             name="clear"
             type="material"
-            color={INACTIVE_ROUTER_ELEMENT_COLOR}
+            color={PRIMARY_PALE_COLOR}
             size={20}
             onPress={close}
           />
           <Icon
             name="done"
             type="material"
-            color={MAIN_ELEMENT_COLOR}
+            color={PRIMARY_COLOR}
             size={25}
             onPress={onButtonPressed}
           />

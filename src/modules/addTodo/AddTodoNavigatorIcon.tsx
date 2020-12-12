@@ -1,21 +1,10 @@
-import React, {
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import {
-  EmitterSubscription,
-  Keyboard,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import React, { FunctionComponent, useCallback, useState } from 'react';
+import { TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { addTodoStyles as styles, ICON_SIZE } from './styles';
 import AddTodoModal from './AddTodoModal';
 
-const AddTodo: FunctionComponent = () => {
+const AddTodoNavigatorIcon: FunctionComponent = () => {
   const [modalVisible, setModalVisible] = useState(false);
 
   const closeModal = useCallback(() => setModalVisible(false), []);
@@ -36,4 +25,4 @@ const AddTodo: FunctionComponent = () => {
   );
 };
 
-export default AddTodo;
+export default AddTodoNavigatorIcon;

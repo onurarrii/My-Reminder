@@ -13,8 +13,8 @@ import {
 import CustomAnimation from '../../../common/components/animation';
 import styles from './styles';
 import {
-  MAIN_DARK_BACKGROUND_COLOR,
-  MAIN_ELEMENT_COLOR,
+  PRIMARY_DARK_BACKGROUND_COLOR,
+  PRIMARY_COLOR,
 } from '../../../common/GlobalStyles';
 import { Icon } from 'react-native-elements';
 
@@ -37,7 +37,7 @@ const Todo: FunctionComponent<ITodoProps> = (props) => {
   return (
     <TouchableHighlight
       onLongPress={removeOnPress}
-      underlayColor={MAIN_DARK_BACKGROUND_COLOR}>
+      underlayColor={PRIMARY_DARK_BACKGROUND_COLOR}>
       <View style={styles.container}>
         <CustomAnimation.FadeInView duration={500}>
           <TouchableOpacity
@@ -52,7 +52,7 @@ const Todo: FunctionComponent<ITodoProps> = (props) => {
               <Icon
                 name="check"
                 type="material"
-                color={checked ? 'white' : MAIN_ELEMENT_COLOR}
+                color={checked ? 'white' : PRIMARY_COLOR}
                 size={15}
               />
             </CustomAnimation.SpringView>

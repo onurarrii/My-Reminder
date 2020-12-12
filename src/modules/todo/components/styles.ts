@@ -1,8 +1,8 @@
 import { StyleSheet } from 'react-native';
 import {
   COMMON_TEXT_STYLE,
-  DEFAULT_BORDER_COLOR,
-  MAIN_ELEMENT_COLOR,
+  PRIMARY_BORDER_COLOR,
+  PRIMARY_COLOR,
 } from '../../../common/GlobalStyles';
 
 const styles = StyleSheet.create({
@@ -17,16 +17,16 @@ const styles = StyleSheet.create({
     height: 30,
     borderRadius: 30 / 2,
     borderWidth: 2,
-    borderColor: MAIN_ELEMENT_COLOR,
+    borderColor: PRIMARY_COLOR,
   },
   checkedIconContainer: {
-    backgroundColor: MAIN_ELEMENT_COLOR,
+    backgroundColor: PRIMARY_COLOR,
     borderWidth: 0, // Do not let borderColor and backgroundColor collapse
   },
   textContainer: {
     justifyContent: 'center',
     borderBottomWidth: 1,
-    borderColor: DEFAULT_BORDER_COLOR,
+    borderColor: PRIMARY_BORDER_COLOR,
     flexGrow: 1,
     paddingLeft: 30,
     paddingRight: 60,

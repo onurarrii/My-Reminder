@@ -4,13 +4,13 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import TodoList from '../modules/todoList/components/TodoList';
-import AddTodo from '../modules/addTodo/AddTodo';
-import RouterIcon from './RouterIcon';
+import AddTodoNavigatorIcon from '../modules/addTodo/AddTodoNavigatorIcon';
+import RouterIcon from './NavigatorIcon';
 import {
-  MAIN_ELEMENT_COLOR,
-  INACTIVE_ROUTER_ELEMENT_COLOR,
-  MAIN_DARK_BACKGROUND_COLOR,
-  DEFAULT_BORDER_COLOR,
+  PRIMARY_COLOR,
+  PRIMARY_PALE_COLOR,
+  PRIMARY_DARK_BACKGROUND_COLOR,
+  PRIMARY_BORDER_COLOR,
 } from '../common/GlobalStyles';
 
 const Tab = createBottomTabNavigator();
@@ -22,7 +22,7 @@ const ROUTES = {
 
 const EmptyComponent: React.FC<void> = () => null;
 
-const Router = () => {
+const Navigator = () => {
   return (
     <Tab.Navigator
       initialRouteName={ROUTES.TASKS}
@@ -42,7 +42,7 @@ const Router = () => {
         component={EmptyComponent}
         options={{
           tabBarLabel: ROUTES.ADD_TASK,
-          tabBarButton: () => <AddTodo />,
+          tabBarButton: () => <AddTodoNavigatorIcon />,
         }}
       />
       <Tab.Screen
@@ -60,8 +60,8 @@ const Router = () => {
 };
 
 const customBarStyle: BottomTabBarOptions = {
-  activeTintColor: MAIN_ELEMENT_COLOR,
-  inactiveTintColor: INACTIVE_ROUTER_ELEMENT_COLOR,
+  activeTintColor: PRIMARY_COLOR,
+  inactiveTintColor: PRIMARY_PALE_COLOR,
   allowFontScaling: true,
   labelStyle: { fontSize: 13, paddingBottom: 5, fontWeight: 'bold' },
   tabStyle: {
@@ -71,9 +71,9 @@ const customBarStyle: BottomTabBarOptions = {
   style: {
     height: 50,
     borderTopWidth: 1,
-    borderTopColor: DEFAULT_BORDER_COLOR,
-    backgroundColor: MAIN_DARK_BACKGROUND_COLOR,
+    borderTopColor: PRIMARY_BORDER_COLOR,
+    backgroundColor: PRIMARY_DARK_BACKGROUND_COLOR,
   },
 };
 
-export default Router;
+export default Navigator;

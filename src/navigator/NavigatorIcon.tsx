@@ -1,8 +1,8 @@
 import React from 'react';
 import { Icon } from 'react-native-elements';
 import {
-  MAIN_ELEMENT_COLOR,
-  INACTIVE_ROUTER_ELEMENT_COLOR,
+  PRIMARY_COLOR,
+  PRIMARY_PALE_COLOR,
 } from '../common/GlobalStyles';
 
 type Props = {
@@ -10,16 +10,14 @@ type Props = {
   focused: boolean;
 };
 
-const RouterIcon: React.FC<Props> = ({ name, focused }) => {
+const NavigatorIcon: React.FC<Props> = ({ name, focused }) => {
   return (
     <Icon
       name={name}
       type="material"
-      color={
-        focused ? MAIN_ELEMENT_COLOR : INACTIVE_ROUTER_ELEMENT_COLOR
-      }
+      color={focused ? PRIMARY_COLOR : PRIMARY_PALE_COLOR}
     />
   );
 };
 
-export default React.memo(RouterIcon);
+export default React.memo(NavigatorIcon);

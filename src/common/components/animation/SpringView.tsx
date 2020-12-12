@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
 
 type SpringPosition = 'left' | 'right' | 'top' | 'bottom';
 

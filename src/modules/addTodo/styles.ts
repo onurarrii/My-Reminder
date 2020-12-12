@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native';
 import {
   COMMON_TEXT_STYLE,
-  DEFAULT_BORDER_COLOR,
-  MAIN_DARK_BACKGROUND_COLOR,
-  MAIN_ELEMENT_COLOR,
+  PRIMARY_BORDER_COLOR,
+  PRIMARY_DARK_BACKGROUND_COLOR,
+  PRIMARY_COLOR,
 } from '../../common/GlobalStyles';
 import { ModalProps } from 'react-native-modal';
 
@@ -15,7 +15,7 @@ export const addTodoStyles = StyleSheet.create({
   },
   iconContainer: {
     borderRadius: 9999999,
-    backgroundColor: MAIN_ELEMENT_COLOR,
+    backgroundColor: PRIMARY_COLOR,
     width: ICON_SIZE * 2,
     height: ICON_SIZE * 2,
     justifyContent: 'center',
@@ -41,7 +41,7 @@ export const addTodoModalStyles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 20,
     paddingHorizontal: 25,
-    backgroundColor: MAIN_DARK_BACKGROUND_COLOR,
+    backgroundColor: PRIMARY_DARK_BACKGROUND_COLOR,
     width: '100%',
     marginTop: '70%',
     flex: 1,
@@ -56,7 +56,7 @@ export const addTodoModalStyles = StyleSheet.create({
     paddingHorizontal: 5,
     borderRadius: 4,
     borderBottomWidth: 1,
-    borderBottomColor: DEFAULT_BORDER_COLOR,
+    borderBottomColor: PRIMARY_BORDER_COLOR,
     minWidth: 100,
   },
   row: {
@@ -72,7 +72,7 @@ export const addTodoModalStyles = StyleSheet.create({
     fontSize: 20,
     flex: 1,
     borderBottomWidth: 2,
-    borderBottomColor: MAIN_ELEMENT_COLOR,
+    borderBottomColor: PRIMARY_COLOR,
     paddingBottom: 5,
   },
   label: {

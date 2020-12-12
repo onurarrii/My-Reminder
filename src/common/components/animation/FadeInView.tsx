@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
-import { useIsFocused } from '@react-navigation/native';
 
 const DEFAULT = {
   duration: 1000,
