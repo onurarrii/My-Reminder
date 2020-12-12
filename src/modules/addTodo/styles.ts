@@ -1,8 +1,11 @@
 import { StyleSheet } from 'react-native';
 import {
+  COMMON_TEXT_STYLE,
+  DEFAULT_BORDER_COLOR,
   MAIN_DARK_BACKGROUND_COLOR,
   MAIN_ELEMENT_COLOR,
 } from '../../common/GlobalStyles';
+import { ModalProps } from 'react-native-modal';
 
 export const ICON_SIZE = 25;
 
@@ -19,26 +22,62 @@ export const addTodoStyles = StyleSheet.create({
   },
 });
 
+export const modalProps: Partial<ModalProps> = {
+  backdropOpacity: 0.3,
+  backdropColor: 'black',
+  animationIn: 'slideInUp',
+  animationOut: 'slideOutDown',
+  animationInTiming: 500,
+  animationOutTiming: 500,
+};
+
 export const addTodoModalStyles = StyleSheet.create({
-  horizontalCentered: { alignItems: 'center' },
-  text: {
-    textAlign: 'center',
-    backgroundColor: MAIN_DARK_BACKGROUND_COLOR,
-    color: 'white',
-    borderRadius: 4,
-    minWidth: '60%',
-    justifyContent: 'center',
-    borderWidth: 1,
-    padding: 5,
-  },
-  submitButtonContainer: {
-    marginTop: 20,
+  modal: {
     alignItems: 'center',
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    backgroundColor: MAIN_ELEMENT_COLOR,
-    justifyContent: 'center',
+    margin: 0,
+    justifyContent: 'flex-end',
   },
-  disabledSubmitButton: { opacity: 0.3, backgroundColor: 'transparent' },
+  container: {
+    alignItems: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 25,
+    backgroundColor: MAIN_DARK_BACKGROUND_COLOR,
+    width: '100%',
+    marginTop: '70%',
+    flex: 1,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
+  },
+  input: {
+    ...COMMON_TEXT_STYLE,
+    textAlign: 'right',
+    paddingTop: 0,
+    paddingBottom: 2,
+    paddingHorizontal: 5,
+    borderRadius: 4,
+    borderBottomWidth: 1,
+    borderBottomColor: DEFAULT_BORDER_COLOR,
+    minWidth: 100,
+  },
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: 25,
+  },
+  header: {
+    ...COMMON_TEXT_STYLE,
+    fontWeight: 'bold',
+    fontSize: 20,
+    flex: 1,
+    borderBottomWidth: 2,
+    borderBottomColor: MAIN_ELEMENT_COLOR,
+    paddingBottom: 5,
+  },
+  label: {
+    ...COMMON_TEXT_STYLE,
+    justifyContent: 'center',
+    fontWeight: 'bold',
+  },
 });

@@ -1,17 +1,20 @@
 import {
   NativeSyntheticEvent,
+  Text,
   TextInput,
   TextInputChangeEventData,
   View,
 } from 'react-native';
-import { addTodoModalStyles as styles } from './styles';
+import { addTodoModalStyles as styles, modalProps } from './styles';
 import { Icon } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import React, { useCallback, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../todoList/slices/todoListSlice';
-import { MAIN_ELEMENT_COLOR } from '../../common/GlobalStyles';
-import FocusableTextInput from '../../common/components/FocusableTextInput';
+import {
+  INACTIVE_ROUTER_ELEMENT_COLOR,
+  MAIN_ELEMENT_COLOR,
+} from '../../common/GlobalStyles';
 
 type Props = {
   visible: boolean;
@@ -39,31 +42,39 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
 
   return (
     <Modal
-      backdropOpacity={0.7}
-      backdropColor="black"
-      animationOut="zoomOut"
+      {...modalProps}
       isVisible={visible}
       onBackButtonPress={close}
-      style={styles.horizontalCentered}>
-      <View style={styles.horizontalCentered}>
-        <FocusableTextInput
-          ref={textInputRef}
-          onChange={onInputChange}
-          value={todoName}
-          placeholder="Add a todo"
-          style={styles.text}
-        />
-      </View>
-      <View style={styles.submitButtonContainer}>
-        <Icon
-          name="add-task"
-          type="material"
-          color="white"
-          size={35}
-          onPress={onButtonPressed}
-          disabled={!todoName}
-          disabledStyle={styles.disabledSubmitButton}
-        />
+      style={styles.modal}>
+      <View style={styles.container}>
+        <View style={styles.row}>
+          <Icon
+            name="clear"
+            type="material"
+            color={INACTIVE_ROUTER_ELEMENT_COLOR}
+            size={20}
+            onPress={close}
+          />
+          <Icon
+            name="done"
+            type="material"
+            color={MAIN_ELEMENT_COLOR}
+            size={25}
+            onPress={onButtonPressed}
+          />
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.header}>Add Todo</Text>
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Name</Text>
+          <TextInput
+            ref={textInputRef}
+            onChange={onInputChange}
+            value={todoName}
+            style={styles.input}
+          />
+        </View>
       </View>
     </Modal>
   );

@@ -9,7 +9,9 @@ export interface ITodoListState {
 const initialState: ITodoListState = {
   todos: Array(10)
     .fill(0)
-    .map((z, i) => ({ name: `onur${i}`, id: `${-i}` })),
+    .map((z, i) => ({ name: `onur${i}`, id: `${-i}` }))
+    .concat({ name: 'Tamamlanma yuzdesi ekle yukariya', id: '-12' })
+    .concat({ name: 'Handle Empty name', id: 'abc' }),
 };
 
 export const todoListSlice = createSlice({
@@ -19,7 +21,7 @@ export const todoListSlice = createSlice({
     addTodo: (state: ITodoListState, action: PayloadAction<ITodoModel>) => {
       const { todos } = state;
       const todo = { id: _.uniqueId(), ...action.payload };
-      todos.push(todo);
+      todos.splice(0, 0, todo);
     },
     removeTodo: (
       state: ITodoListState,

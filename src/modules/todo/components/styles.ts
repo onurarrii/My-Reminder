@@ -25,14 +25,12 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     justifyContent: 'center',
-    height: '100%',
     borderBottomWidth: 1,
     borderColor: DEFAULT_BORDER_COLOR,
     flexGrow: 1,
     paddingLeft: 30,
     paddingRight: 60,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingVertical: 10,
   },
   text: {
     ...COMMON_TEXT_STYLE,
