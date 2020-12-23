@@ -10,8 +10,6 @@ const initialState: ITodoListState = {
   todos: Array(10)
     .fill(0)
     .map((z, i) => ({ name: `onur${i}`, id: `${-i}` }))
-    .concat({ name: 'Tamamlanma yuzdesi ekle yukariya', id: '-12' })
-    .concat({ name: 'Handle Empty name', id: 'abc' }),
 };
 
 export const todoListSlice = createSlice({
