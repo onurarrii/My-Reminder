@@ -1,5 +1,6 @@
 import {
   NativeSyntheticEvent,
+  Switch,
   Text,
   TextInput,
   TextInputChangeEventData,
@@ -8,13 +9,17 @@ import {
 import { addTodoModalStyles as styles, modalProps } from './styles';
 import { Icon } from 'react-native-elements';
 import Modal from 'react-native-modal';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../todoList/slices/todoListSlice';
 import {
   PRIMARY_PALE_COLOR,
   PRIMARY_COLOR,
+  FONT_COLOR,
 } from '../../common/GlobalStyles';
+import { formatDate } from '../../common/utils';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { ITodoModel } from '../todo/model/TodoModel';
 
 type Props = {
   visible: boolean;
@@ -23,22 +28,63 @@ type Props = {
 
 const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
   const dispatch = useDispatch();
-  const [todoName, setTodoName] = useState<string>('');
-  const textInputRef = useRef<TextInput>(null);
 
-  const onInputChange = useCallback(
+  const [todo, setTodo] = useState<ITodoModel>({
+    name: '',
+    reminderDateTimestamp: undefined,
+  });
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [reminderEnabled, setReminderEnabled] = useState(false);
+
+  const onDateSelected = (date: Date) => {
+    setTodo((prevTodo) => ({
+      ...prevTodo,
+      reminderDateTimestamp: date.getTime(),
+    }));
+    setShowDatePicker(false);
+  };
+
+  const removeReminderDate = () => {
+    setTodo((prevTodo) => ({ ...prevTodo, reminderDateTimestamp: undefined }));
+  };
+
+  const onDateSelectionCancel = () => {
+    setReminderEnabled(false);
+    removeReminderDate();
+    setShowDatePicker(false);
+  };
+
+  const toggleReminderEnabled = () => {
+    setReminderEnabled((prev) => {
+      const newValue = !prev;
+      if (newValue) {
+        setShowDatePicker(true);
+      } else {
+        removeReminderDate();
+      }
+      return newValue;
+    });
+  };
+
+  const onNameInputChange = useCallback(
     (e: NativeSyntheticEvent<TextInputChangeEventData>) => {
-      setTodoName(e.nativeEvent.text);
+      const { text } = e.nativeEvent;
+      setTodo((prevTodo) => ({ ...prevTodo, name: text }));
     },
     [],
   );
 
-  const onButtonPressed = useCallback(() => {
-    textInputRef.current?.clear();
-    setTodoName('');
-    dispatch(addTodo({ name: todoName }));
+  const clearForm = useCallback(() => {
+    setTodo({ name: '', reminderDateTimestamp: undefined });
+    setReminderEnabled(false);
+    setShowDatePicker(false);
+  }, []);
+
+  const onSubmit = useCallback(() => {
+    clearForm();
+    dispatch(addTodo(todo));
     close();
-  }, [todoName, dispatch]);
+  }, [clearForm, todo, dispatch, close]);
 
   return (
     <Modal
@@ -60,7 +106,7 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
             type="material"
             color={PRIMARY_COLOR}
             size={25}
-            onPress={onButtonPressed}
+            onPress={onSubmit}
           />
         </View>
         <View style={styles.row}>
@@ -69,13 +115,37 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
         <View style={styles.row}>
           <Text style={styles.label}>Name</Text>
           <TextInput
-            ref={textInputRef}
-            onChange={onInputChange}
-            value={todoName}
+            onChange={onNameInputChange}
+            value={todo.name}
             style={styles.input}
           />
         </View>
+        <View style={styles.row}>
+          <Text style={styles.label}>Set Reminder</Text>
+          <Switch
+            trackColor={{ false: PRIMARY_PALE_COLOR, true: PRIMARY_COLOR }}
+            thumbColor={FONT_COLOR}
+            ios_backgroundColor={PRIMARY_PALE_COLOR}
+            onValueChange={toggleReminderEnabled}
+            value={reminderEnabled}
+          />
+        </View>
+        {todo.reminderDateTimestamp && (
+          <Text style={styles.label}>
+            Reminder is set to{' '}
+            <Text style={styles.reminderText}>
+              {formatDate(new Date(todo.reminderDateTimestamp))}
+            </Text>
+          </Text>
+        )}
       </View>
+      <DateTimePickerModal
+        isVisible={showDatePicker}
+        isDarkModeEnabled
+        mode="datetime"
+        onCancel={onDateSelectionCancel}
+        onConfirm={onDateSelected}
+      />
     </Modal>
   );
 };

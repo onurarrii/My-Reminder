@@ -15,7 +15,7 @@ export const addTodoStyles = StyleSheet.create({
     transform: [{ translateY: -10 }],
   },
   iconContainer: {
-    borderRadius: 9999999,
+    borderRadius: ICON_SIZE,
     backgroundColor: PRIMARY_COLOR,
     width: ICON_SIZE * 2,
     height: ICON_SIZE * 2,
@@ -80,5 +80,8 @@ export const addTodoModalStyles = StyleSheet.create({
     ...COMMON_TEXT_STYLE,
     justifyContent: 'center',
     fontWeight: 'bold',
+  },
+  reminderText: {
+    color: PRIMARY_COLOR,
   },
 });

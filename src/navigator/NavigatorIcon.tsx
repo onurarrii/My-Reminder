@@ -1,9 +1,6 @@
 import React from 'react';
 import { Icon } from 'react-native-elements';
-import {
-  PRIMARY_COLOR,
-  PRIMARY_PALE_COLOR,
-} from '../common/GlobalStyles';
+import { PRIMARY_COLOR, PRIMARY_PALE_COLOR } from '../common/GlobalStyles';
 
 type Props = {
   name: string;
