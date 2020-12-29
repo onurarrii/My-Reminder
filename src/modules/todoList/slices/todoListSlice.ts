@@ -1,24 +1,22 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ITodoModel, ITodoModelWithId } from '../../todo/model/TodoModel';
-import _ from 'lodash';
+import { uid } from '../../../common/utils';
 
 export interface ITodoListState {
   todos: ITodoModelWithId[];
 }
 
 const initialState: ITodoListState = {
-  todos: Array(10)
-    .fill(0)
-    .map((z, i) => ({ name: `onur${i}`, id: `${-i}` })),
+  todos: [],
 };
 
 export const todoListSlice = createSlice({
   name: 'todoList',
-  initialState: initialState,
+  initialState,
   reducers: {
     addTodo: (state: ITodoListState, action: PayloadAction<ITodoModel>) => {
       const { todos } = state;
-      const todo = { id: _.uniqueId(), ...action.payload };
+      const todo = { id: uid(), ...action.payload };
       todos.splice(0, 0, todo);
     },
     removeTodo: (

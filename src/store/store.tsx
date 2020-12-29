@@ -1,10 +1,23 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import todoListReducer from '../modules/todoList/slices/todoListSlice';
+import { persistStore, persistReducer } from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
 
-const store = configureStore({
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+};
+
+const persistableTodoListReducer = persistReducer(
+  persistConfig,
+  todoListReducer,
+);
+
+export const store = configureStore({
   reducer: {
-    todoList: todoListReducer,
+    todoList: persistableTodoListReducer,
   },
+  middleware: getDefaultMiddleware({ serializableCheck: false }),
 });
 
-export default store;
+export const persistor = persistStore(store);
