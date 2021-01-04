@@ -32,6 +32,7 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
   const [todo, setTodo] = useState<ITodoModel>({
     name: '',
     reminderDateTimestamp: undefined,
+    completed: false,
   });
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [reminderEnabled, setReminderEnabled] = useState(false);
@@ -75,7 +76,7 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
   );
 
   const clearForm = useCallback(() => {
-    setTodo({ name: '', reminderDateTimestamp: undefined });
+    setTodo({ name: '', reminderDateTimestamp: undefined, completed: false });
     setReminderEnabled(false);
     setShowDatePicker(false);
   }, []);

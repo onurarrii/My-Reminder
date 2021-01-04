@@ -27,14 +27,10 @@ export const todoListSlice = createSlice({
     },
     updateTodo: (
       state: ITodoListState,
-      action: PayloadAction<{ todo: ITodoModelWithId; newName: string }>,
+      action: PayloadAction<ITodoModelWithId>,
     ) => {
-      const todo = state.todos.find(
-        (_todo) => _todo.id === action.payload.todo.id,
-      );
-      if (todo) {
-        todo.name = action.payload.newName;
-      }
+      const oldTodo = state.todos.find((todo) => todo.id === action.payload.id);
+      Object.assign(oldTodo, action.payload);
     },
   },
 });

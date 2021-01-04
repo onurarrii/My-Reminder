@@ -1,14 +1,10 @@
-import React, {
-  FunctionComponent,
-  useCallback,
-  useMemo,
-  useState,
-} from 'react';
+import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import {
   getSelectWithId,
   removeTodo,
+  updateTodo,
 } from '../../todoList/slices/todoListSlice';
 import CustomAnimation from '../../../common/components/animation';
 import styles from './styles';
@@ -26,17 +22,20 @@ export interface ITodoProps {
 const Todo: FunctionComponent<ITodoProps> = (props) => {
   const dispatch = useDispatch();
   const { id } = props;
-  const [checked, setChecked] = useState(false);
-
   const selector = useMemo(() => getSelectWithId(id), [id]);
   const todo = useSelector(selector);
+
+  const toggleCompletedCheck = () => {
+    const newTodo = { ...todo, completed: !todo.completed };
+    dispatch(updateTodo(newTodo));
+  };
 
   const removeOnPress = useCallback(() => {
     dispatch(removeTodo(todo));
   }, [dispatch, todo]);
 
   const descriptionText = useMemo(() => {
-    if (checked) {
+    if (todo.completed) {
       return 'Completed!';
     } else if (todo.reminderDateTimestamp) {
       const reminderDate = new Date(todo.reminderDateTimestamp);
@@ -47,7 +46,7 @@ const Todo: FunctionComponent<ITodoProps> = (props) => {
     } else {
       return 'No reminder';
     }
-  }, [checked, todo?.reminderDateTimestamp]);
+  }, [todo?.completed, todo?.reminderDateTimestamp]);
 
   return (
     <TouchableHighlight
@@ -58,16 +57,16 @@ const Todo: FunctionComponent<ITodoProps> = (props) => {
           <TouchableOpacity
             style={[
               styles.iconContainer,
-              checked && styles.checkedIconContainer,
+              todo?.completed && styles.checkedIconContainer,
             ]}
-            onPress={() => setChecked((prev) => !prev)}>
+            onPress={toggleCompletedCheck}>
             <CustomAnimation.SpringView
               initialSpringPosition="left"
               defaultConfig={{ friction: 10 }}>
               <Icon
                 name="check"
                 type="material"
-                color={checked ? 'white' : PRIMARY_COLOR}
+                color={todo?.completed ? 'white' : PRIMARY_COLOR}
                 size={15}
               />
             </CustomAnimation.SpringView>
