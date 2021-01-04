@@ -20,8 +20,7 @@ const TodoListCompletionProgressBar = () => {
         width={null}
         height={14}
         animationType="spring"
-        borderColor={PRIMARY_DARK_BACKGROUND_COLOR}
-        borderWidth={0}
+        borderWidth={1}
         borderRadius={10}
       />
     </View>
