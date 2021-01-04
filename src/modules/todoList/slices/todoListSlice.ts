@@ -55,4 +55,9 @@ export const getSelectWithId = (id: string) => {
   };
 };
 
+export const getCompletionRatio = (state: SelectorState) => {
+  const { todos } = state.todoList;
+  return todos.filter((t) => t.completed).length / todos.length;
+};
+
 export default todoListSlice.reducer;
