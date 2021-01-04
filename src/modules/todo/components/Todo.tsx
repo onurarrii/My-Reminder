@@ -13,10 +13,11 @@ import {
 import CustomAnimation from '../../../common/components/animation';
 import styles from './styles';
 import {
-  PRIMARY_DARK_BACKGROUND_COLOR,
   PRIMARY_COLOR,
+  PRIMARY_DARK_BACKGROUND_COLOR,
 } from '../../../common/GlobalStyles';
 import { Icon } from 'react-native-elements';
+import { formatDate, getTimeDifferenceText } from '../../../common/utils';
 
 export interface ITodoProps {
   id: string;
@@ -33,6 +34,20 @@ const Todo: FunctionComponent<ITodoProps> = (props) => {
   const removeOnPress = useCallback(() => {
     dispatch(removeTodo(todo));
   }, [dispatch, todo]);
+
+  const descriptionText = useMemo(() => {
+    if (checked) {
+      return 'Completed!';
+    } else if (todo.reminderDateTimestamp) {
+      const reminderDate = new Date(todo.reminderDateTimestamp);
+      const timeDifference = getTimeDifferenceText({ endDate: reminderDate });
+      return timeDifference
+        ? `Reminder in ${timeDifference}`
+        : `Reminder at ${formatDate(reminderDate)}`;
+    } else {
+      return 'No reminder';
+    }
+  }, [checked, todo?.reminderDateTimestamp]);
 
   return (
     <TouchableHighlight
@@ -64,12 +79,7 @@ const Todo: FunctionComponent<ITodoProps> = (props) => {
               initialSpringPosition="right"
               defaultConfig={{ friction: 8 }}>
               <Text style={styles.text}>{todo.name}</Text>
-
-              <Text style={styles.description}>
-                {checked
-                  ? 'Completed!'
-                  : `${Math.floor(Math.random() * 10)} Reminders`}
-              </Text>
+              <Text style={styles.description}>{descriptionText}</Text>
             </CustomAnimation.SpringView>
           </CustomAnimation.FadeInView>
         </View>
