@@ -6,12 +6,16 @@ const styles = StyleSheet.create({
     backgroundColor: PRIMARY_BACKGROUND_COLOR,
   },
   container: {
-    paddingTop: 30,
     paddingBottom: 30,
     justifyContent: 'flex-start',
   },
   todoContainer: {
     flexShrink: 1,
+  },
+  progressBarContainer: {
+    backgroundColor: PRIMARY_BACKGROUND_COLOR,
+    width: '100%',
+    padding: 20,
   },
 });
 

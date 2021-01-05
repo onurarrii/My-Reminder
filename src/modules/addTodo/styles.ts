@@ -59,6 +59,7 @@ export const addTodoModalStyles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: PRIMARY_BORDER_COLOR,
     minWidth: 100,
+    maxWidth: 180,
   },
   row: {
     flexDirection: 'row',

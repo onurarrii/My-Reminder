@@ -9,7 +9,7 @@ import {
 import { addTodoModalStyles as styles, modalProps } from './styles';
 import { Icon } from 'react-native-elements';
 import Modal from 'react-native-modal';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTodo } from '../todoList/slices/todoListSlice';
 import {
@@ -32,6 +32,7 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
   const [todo, setTodo] = useState<ITodoModel>({
     name: '',
     reminderDateTimestamp: undefined,
+    completed: false,
   });
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [reminderEnabled, setReminderEnabled] = useState(false);
@@ -75,7 +76,7 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
   );
 
   const clearForm = useCallback(() => {
-    setTodo({ name: '', reminderDateTimestamp: undefined });
+    setTodo({ name: '', reminderDateTimestamp: undefined, completed: false });
     setReminderEnabled(false);
     setShowDatePicker(false);
   }, []);
@@ -85,6 +86,10 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
     dispatch(addTodo(todo));
     close();
   }, [clearForm, todo, dispatch, close]);
+
+  const submitButtonDisabled = useMemo(() => {
+    return !todo.name;
+  }, [todo.name]);
 
   return (
     <Modal
@@ -104,9 +109,11 @@ const AddTodoModal: React.FC<Props> = ({ visible, close }) => {
           <Icon
             name="done"
             type="material"
-            color={PRIMARY_COLOR}
+            color={submitButtonDisabled ? PRIMARY_PALE_COLOR : PRIMARY_COLOR}
             size={25}
             onPress={onSubmit}
+            disabled={submitButtonDisabled}
+            disabledStyle={{ backgroundColor: 'transparent' }}
           />
         </View>
         <View style={styles.row}>
